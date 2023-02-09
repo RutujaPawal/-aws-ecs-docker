@@ -54,7 +54,7 @@ pipeline {
         stage('Docker Run') {
           steps{
              script {
-                sh 'docker run -d -p 8096:8080 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
+                sh 'docker run -d -p 8096:3000 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
               }
             }
         }
