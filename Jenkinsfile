@@ -12,13 +12,7 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RutujaPawal/-aws-ecs-docker.git']]])
             }
         }
-        
-        stage ('Build') {
-            steps {
-                sh 'mvn clean install'           
-            }
-        }
-        
+
         stage('Building image') {
             steps{
                  script {
@@ -54,7 +48,7 @@ pipeline {
         stage('Docker Run') {
           steps{
              script {
-                sh 'docker run -d -p 8096:3000 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
+                sh 'docker run -d -p 8097:3000 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
               }
             }
         }
