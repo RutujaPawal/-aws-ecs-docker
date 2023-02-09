@@ -3,13 +3,13 @@ pipeline {
   agent any
   
    environment {
-      registry = "public.ecr.aws/t9h4g4g8/ecr_repo"
+      registry = "public.ecr.aws/t9h4g4g8/aws-ecs-docker"
   }
   
    stages {
         stage('Cloning Github project/source code') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RutujaPawal/pushDockerImage_to_AWSECRrepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RutujaPawal/-aws-ecs-docker.git']]])
             }
         }
         
@@ -38,7 +38,7 @@ pipeline {
         stage('Pushing Image on ECR') {
           steps {
               script {
-              sh 'docker push public.ecr.aws/t9h4g4g8/ecr_repo:latest'
+              sh 'docker push public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
               }
             }
         } 
@@ -54,7 +54,7 @@ pipeline {
         stage('Docker Run') {
           steps{
              script {
-                sh 'docker run -d -p 8096:8080 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/ecr_repo:latest'
+                sh 'docker run -d -p 8096:8080 --rm --name mypythonContainer public.ecr.aws/t9h4g4g8/aws-ecs-docker:latest'
               }
             }
         }
